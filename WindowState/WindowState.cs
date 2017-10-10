@@ -6,7 +6,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace com.gmail.alexellingsen.WindowStates
+namespace LeaxDev.WindowStates
 {
     public class WindowState : IXmlSerializable
     {
