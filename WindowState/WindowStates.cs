@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -87,6 +88,42 @@ namespace LeaxDev.WindowStates
         public bool Contains(string form)
         {
             return this.windowStates.ContainsKey(form);
+        }
+
+        /// <summary>
+        /// Restores <see cref="Form"/>, <see cref="ColumnHeader"/> and <see cref="SplitContainer"/> states.
+        /// </summary>
+        /// <param name="form">The <see cref="Form"/> to restore.</param>
+        /// <param name="throwErrorIfNotFound">Throw <see cref="KeyNotFoundException"/> exception if <paramref name="form"/> is not found.</param>
+        /// <param name="restoreColumns">True to restore all <see cref="ColumnHeader"/> found in <paramref name="form"/>.</param>
+        /// <param name="restoreSplitContainers">True to restore all <see cref="SplitContainer"/> found in <paramref name="form"/>.</param>
+        public void Restore(Form form, bool throwErrorIfNotFound, bool restoreColumns = true, bool restoreSplitContainers = true)
+        {
+            if (this.Contains(form.Name))
+            {
+                this[form.Name].RestoreForm(form, restoreColumns, restoreSplitContainers);
+            }
+            else
+            {
+                if (throwErrorIfNotFound)
+                    throw new KeyNotFoundException($"WindowState for Form '{form.Name}' not found.");
+            }
+        }
+
+        /// <summary>
+        /// Saves <see cref="Form"/>, <see cref="ColumnHeader"/> and <see cref="SplitContainer"/> states.
+        /// </summary>
+        /// <param name="form">The <see cref="Form"/> to save.</param>
+        /// <param name="restoreColumns">True to save all <see cref="ColumnHeader"/> found in <paramref name="form"/>.</param>
+        /// <param name="restoreSplitContainers">True to save all <see cref="SplitContainer"/> found in <paramref name="form"/>.</param>
+        public void Save(Form form, bool saveColumns = true, bool saveSplitContainers = true)
+        {
+            if (!this.Contains(form.Name))
+            {
+                this.Add(form.Name);
+            }
+
+            this[form.Name].SaveForm(form, saveColumns, saveSplitContainers);
         }
     }
 }
