@@ -21,12 +21,12 @@ namespace LeaxDev.WindowStates
         /// <summary>
         /// Indexer
         /// </summary>
-        /// <param name="form">The <see cref="System.Windows.Forms.Form"/> to find.</param>
-        public WindowState this[string form]
+        /// <param name="formName">The <see cref="System.Windows.Forms.Form"/> to find.</param>
+        public WindowState this[string formName]
         {
             get
             {
-                return windowStates[form];
+                return windowStates[formName];
             }
         }
 
@@ -75,19 +75,19 @@ namespace LeaxDev.WindowStates
         /// <summary>
         /// Adds a new <see cref="WindowState"/> to handle <see cref="System.Windows.Forms.Form"/>.
         /// </summary>
-        /// <param name="form">The <see cref="System.Windows.Forms.Form"/> name.</param>
-        public void Add(string form)
+        /// <param name="formName">The <see cref="System.Windows.Forms.Form"/> name.</param>
+        public void Add(string formName)
         {
-            this.windowStates.Add(form, new WindowState(form));
+            this.windowStates.Add(formName, new WindowState(formName));
         }
 
         /// <summary>
         /// Determines whether an <see cref="WindowState"/> already exists for given <see cref="System.Windows.Forms.Form"/>.
         /// </summary>
-        /// <param name="form">The <see cref="System.Windows.Forms.Form"/> name.</param>
-        public bool Contains(string form)
+        /// <param name="formName">The <see cref="System.Windows.Forms.Form"/> name.</param>
+        public bool Contains(string formName)
         {
-            return this.windowStates.ContainsKey(form);
+            return this.windowStates.ContainsKey(formName);
         }
 
         /// <summary>
