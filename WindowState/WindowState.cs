@@ -66,7 +66,7 @@ namespace LeaxDev.WindowStates
         /// width and <see cref="SplitContainer"/> splitter distance.
         /// </summary>
         /// <param name="form">The <see cref="Form"/> to restore.</param>
-        public void RestoreForm(Form form, bool restoreColumns = true)
+        public void RestoreForm(Form form, bool restoreColumns = true, bool restoreSplitContainers = true)
         {
             if (!this.Location.IsEmpty)
             {
@@ -83,7 +83,8 @@ namespace LeaxDev.WindowStates
             if (restoreColumns)
                 this.RestoreColumns(form);
 
-            this.RestoreSplitContainers(form);
+            if (restoreSplitContainers)
+                this.RestoreSplitContainers(form);
         }
 
         /// <summary>
@@ -92,7 +93,7 @@ namespace LeaxDev.WindowStates
         /// width and <see cref="SplitContainer"/> splitter distance.
         /// </summary>
         /// <param name="form">The <see cref="Form"/> to save.</param>
-        public void SaveForm(Form form, bool saveColumns = true)
+        public void SaveForm(Form form, bool saveColumns = true, bool saveSplitContainers = true)
         {
             if (!(form.WindowState == FormWindowState.Maximized))
             {
@@ -108,11 +109,10 @@ namespace LeaxDev.WindowStates
             this.FormWindowState = form.WindowState;
 
             if (saveColumns)
-            {
                 this.SaveColumns(form);
-            }
 
-            this.SaveSplitContainers(form);
+            if (saveSplitContainers)
+                this.SaveSplitContainers(form);
         }
 
         #region IXmlSerializable Members
